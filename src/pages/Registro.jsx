@@ -3,12 +3,20 @@ import { useState } from 'react';
 import Formulario from '../components/Formulario';
 import SocialButton from '../components/SocialButton';
 import Alert from '../components/Alert';
+import { useApp } from '../context/AppProvider';
 
 const Registro = () => {
+	const { theme } = useApp();
 	const [alert, setAlert] = useState({ error: '', msg: '', color: '' });
 	return (
-		<>
-			<div className="container border border-light-subtle rounded-5 bg-white p-5 mt-5">
+		<div
+			className={
+				theme === 'light'
+					? 'bg-white container-fluid bg-white'
+					: 'bg-black container-fluid'
+			}
+		>
+			<div className="container border border-light-subtle rounded-5 bg-white p-5">
 				<h1 className="fs-1">Crea una cuenta</h1>
 				<div className="d-flex gap-3 justify-content-center my-3">
 					<SocialButton icon="fa-brands fa-facebook" />
@@ -19,7 +27,7 @@ const Registro = () => {
 				<Formulario setAlert={setAlert} />
 				{alert.msg && <Alert color={alert.color}>{alert.msg}</Alert>}
 			</div>
-		</>
+		</div>
 	);
 };
 
